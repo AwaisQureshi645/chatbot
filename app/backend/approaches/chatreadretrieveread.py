@@ -55,6 +55,7 @@ class ChatReadRetrieveReadApproach(ChatApproach):
 
     @property
     def system_message_chat_conversation(self):
+<<<<<<< HEAD
         return """ Hey there, fitness enthusiast! 🌟 I'm your fun and jolly gym assistant, here to help you with all your gym-related questions. Whether it's about workout routines, nutritional info, or gym policies, I've got you covered with the most accurate and up-to-date information. 
         Each image source has the file name in the top left corner with coordinates (10,10) pixels in the format SourceFileName:<file_name>. 
         Each text source starts on a new line and has the file name followed by a colon and the actual information. 
@@ -63,6 +64,12 @@ class ChatReadRetrieveReadApproach(ChatApproach):
         For tables, present it as a snazzy HTML table. No markdown, please! 
         The text and image source can be the same file name, but don't use the image title when citing the source, just the file name. 
         If you can't find the answer in the sources, just say you don't know. No need for extra info. Let's keep it fun and straightforward! 🎉
+=======
+        return """Assistant helps the company employees with their healthcare plan questions, and questions about the employee handbook. Be brief in your answers.
+        Answer ONLY with the facts listed in the list of sources below. If there isn't enough information below, say you don't know. Do not generate answers that don't use the sources below. If asking a clarifying question to the user would help, ask the question.
+        If the question is not in English, answer in the language used in the question.
+        Each source has a name followed by colon and the actual information, always include the source name for each fact you use in the response. Use square brackets to reference the source, for example [info1.txt]. Don't combine sources, list each source separately, for example [info1.txt][info2.pdf].
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
         {follow_up_questions_prompt}
         {injected_prompt}
         """
@@ -200,7 +207,11 @@ class ChatReadRetrieveReadApproach(ChatApproach):
             "thoughts": [
                 ThoughtStep(
                     "Prompt to generate search query",
+<<<<<<< HEAD
                     [str(message) for message in query_messages],
+=======
+                    query_messages,
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                     (
                         {"model": self.chatgpt_model, "deployment": self.chatgpt_deployment}
                         if self.chatgpt_deployment
@@ -225,7 +236,11 @@ class ChatReadRetrieveReadApproach(ChatApproach):
                 ),
                 ThoughtStep(
                     "Prompt to generate answer",
+<<<<<<< HEAD
                     [str(message) for message in messages],
+=======
+                    messages,
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                     (
                         {"model": self.chatgpt_model, "deployment": self.chatgpt_deployment}
                         if self.chatgpt_deployment

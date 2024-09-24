@@ -41,7 +41,11 @@ The repo includes sample data so it's ready to try end to end. In this sample ap
 - Renders citations and thought process for each answer
 - Includes settings directly in the UI to tweak the behavior and experiment with options
 - Integrates Azure AI Search for indexing and retrieval of documents, with support for [many document formats](/docs/data_ingestion.md#supported-document-formats) as well as [integrated vectorization](/docs/data_ingestion.md#overview-of-integrated-vectorization)
+<<<<<<< HEAD
 - Optional usage of [GPT-4 with vision](/docs/gpt4vision.md) to reason over image-heavy documents
+=======
+- Optional usage of [GPT-4 with vision](/docs/gpt4v.md) to reason over image-heavy documents
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 - Optional addition of [speech input/output](/docs/deploy_features.md#enabling-speech-inputoutput) for accessibility
 - Optional automation of [user login and data access](/docs/login_and_acl.md) via Microsoft Entra
 - Performance tracing and monitoring with Application Insights
@@ -63,12 +67,22 @@ The repo includes sample data so it's ready to try end to end. In this sample ap
 ### Cost estimation
 
 Pricing varies per region and usage, so it isn't possible to predict exact costs for your usage.
+<<<<<<< HEAD
 However, you can try the [Azure pricing calculator](https://azure.com/e/d18187516e9e421e925b3b311eec8aae) for the resources below.
 
 - Azure App Service: Basic Tier with 1 CPU core, 1.75 GB RAM. Pricing per hour. [Pricing](https://azure.microsoft.com/pricing/details/app-service/linux/)
 - Azure OpenAI: Standard tier, GPT and Ada models. Pricing per 1K tokens used, and at least 1K tokens are used per question. [Pricing](https://azure.microsoft.com/pricing/details/cognitive-services/openai-service/)
 - Azure AI Document Intelligence: SO (Standard) tier using pre-built layout. Pricing per document page, sample documents have 261 pages total. [Pricing](https://azure.microsoft.com/pricing/details/form-recognizer/)
 - Azure AI Search: Standard tier, 1 replica, free level of semantic search. Pricing per hour. [Pricing](https://azure.microsoft.com/pricing/details/search/)
+=======
+However, you can try the [Azure pricing calculator](https://azure.com/e/a87a169b256e43c089015fda8182ca87) for the resources below.
+
+- Azure App Service: Basic Tier with 1 CPU core, 1.75 GB RAM. Pricing per hour. [Pricing](https://azure.microsoft.com/pricing/details/app-service/linux/)
+- Azure Container Apps: Only provisioned if you deploy to Azure Container Apps following [the ACA deployment guide](docs/azure_container_apps.md). Consumption plan with 1 CPU core, 2.0 GB RAM. Pricing with Pay-as-You-Go. [Pricing](https://azure.microsoft.com/pricing/details/container-apps/)
+- Azure OpenAI: Standard tier, GPT and Ada models. Pricing per 1K tokens used, and at least 1K tokens are used per question. [Pricing](https://azure.microsoft.com/pricing/details/cognitive-services/openai-service/)
+- Azure AI Document Intelligence: SO (Standard) tier using pre-built layout. Pricing per document page, sample documents have 261 pages total. [Pricing](https://azure.microsoft.com/pricing/details/form-recognizer/)
+- Azure AI Search: Basic tier, 1 replica, free level of semantic search. Pricing per hour. [Pricing](https://azure.microsoft.com/pricing/details/search/)
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 - Azure Blob Storage: Standard tier with ZRS (Zone-redundant storage). Pricing per storage and read operations. [Pricing](https://azure.microsoft.com/pricing/details/storage/blobs/)
 - Azure Monitor: Pay-as-you-go tier. Costs based on data ingested. [Pricing](https://azure.microsoft.com/pricing/details/monitor/)
 
@@ -126,7 +140,11 @@ A related option is VS Code Dev Containers, which will open the project in your 
 
 ## Deploying
 
+<<<<<<< HEAD
 Follow these steps to provision Azure resources and deploy the application code:
+=======
+The steps below will provision Azure resources and deploy the application code to Azure App Service. To deploy to Azure Container Apps instead, follow [the container apps deployment guide](docs/azure_container_apps.md).
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 
 1. Login to your Azure account:
 
@@ -134,6 +152,14 @@ Follow these steps to provision Azure resources and deploy the application code:
     azd auth login
     ```
 
+<<<<<<< HEAD
+=======
+    For GitHub Codespaces users, if the previous command fails, try:
+   ```shell
+    azd auth login --use-device-code
+    ```
+
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 1. Create a new azd environment:
 
     ```shell
@@ -157,11 +183,23 @@ It will look like the following:
 
 If you've only changed the backend/frontend code in the `app` folder, then you don't need to re-provision the Azure resources. You can just run:
 
+<<<<<<< HEAD
 ```azd deploy```
 
 If you've changed the infrastructure files (`infra` folder or `azure.yaml`), then you'll need to re-provision the Azure resources. You can do that by running:
 
 ```azd up```
+=======
+```shell
+azd deploy
+```
+
+If you've changed the infrastructure files (`infra` folder or `azure.yaml`), then you'll need to re-provision the Azure resources. You can do that by running:
+
+```shell
+azd up
+```
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 
 #### Sharing environments
 

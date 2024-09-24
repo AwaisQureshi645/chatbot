@@ -15,4 +15,8 @@ if os.getenv("WEBSITE_SKU") == "LinuxFree":
     workers = 1
 else:
     workers = (num_cpus * 2) + 1
+<<<<<<< HEAD
 worker_class = "uvicorn.workers.UvicornWorker"
+=======
+worker_class = "custom_uvicorn_worker.CustomUvicornWorker"
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0

@@ -14,7 +14,14 @@ param appServicePlanName string
 
 param usePrivateEndpoint bool = false
 
+<<<<<<< HEAD
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' existing = {
+=======
+@allowed(['appservice', 'containerapps'])
+param deploymentTarget string
+
+resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' existing = if (deploymentTarget == 'appservice') {
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
   name: appServicePlanName
 }
 

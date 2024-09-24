@@ -1,4 +1,9 @@
 import { useRef, useState, useEffect, useContext } from "react";
+<<<<<<< HEAD
+=======
+import { useTranslation } from "react-i18next";
+import { Helmet } from "react-helmet-async";
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 import { Checkbox, Panel, DefaultButton, TextField, ITextFieldProps, ICheckboxProps } from "@fluentui/react";
 import { SparkleFilled } from "@fluentui/react-icons";
 import { useId } from "@fluentui/react-hooks";
@@ -9,14 +14,22 @@ import styles from "./Chat.module.css";
 import {
     chatApi,
     configApi,
+<<<<<<< HEAD
     getSpeechApi,
+=======
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
     RetrievalMode,
     ChatAppResponse,
     ChatAppResponseOrError,
     ChatAppRequest,
     ResponseMessage,
     VectorFieldOptions,
+<<<<<<< HEAD
     GPT4VInput
+=======
+    GPT4VInput,
+    SpeechConfig
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 } from "../../api";
 import { Answer, AnswerError, AnswerLoading } from "../../components/Answer";
 import { QuestionInput } from "../../components/QuestionInput";
@@ -32,8 +45,13 @@ import { VectorSettings } from "../../components/VectorSettings";
 import { useMsal } from "@azure/msal-react";
 import { TokenClaimsDisplay } from "../../components/TokenClaimsDisplay";
 import { GPT4VSettings } from "../../components/GPT4VSettings";
+<<<<<<< HEAD
 import { toolTipText } from "../../i18n/tooltips.js";
 import { LoginContext } from "../../loginContext";
+=======
+import { LoginContext } from "../../loginContext";
+import { LanguagePicker } from "../../i18n/LanguagePicker";
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 
 const Chat = () => {
     const [isConfigPanelOpen, setIsConfigPanelOpen] = useState(false);
@@ -74,9 +92,26 @@ const Chat = () => {
     const [showSemanticRankerOption, setShowSemanticRankerOption] = useState<boolean>(false);
     const [showVectorOption, setShowVectorOption] = useState<boolean>(false);
     const [showUserUpload, setShowUserUpload] = useState<boolean>(false);
+<<<<<<< HEAD
     const [showSpeechInput, setShowSpeechInput] = useState<boolean>(false);
     const [showSpeechOutputBrowser, setShowSpeechOutputBrowser] = useState<boolean>(false);
     const [showSpeechOutputAzure, setShowSpeechOutputAzure] = useState<boolean>(false);
+=======
+    const [showLanguagePicker, setshowLanguagePicker] = useState<boolean>(false);
+    const [showSpeechInput, setShowSpeechInput] = useState<boolean>(false);
+    const [showSpeechOutputBrowser, setShowSpeechOutputBrowser] = useState<boolean>(false);
+    const [showSpeechOutputAzure, setShowSpeechOutputAzure] = useState<boolean>(false);
+    const audio = useRef(new Audio()).current;
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    const speechConfig: SpeechConfig = {
+        speechUrls,
+        setSpeechUrls,
+        audio,
+        isPlaying,
+        setIsPlaying
+    };
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 
     const getConfig = async () => {
         configApi().then(config => {
@@ -88,6 +123,10 @@ const Chat = () => {
                 setRetrievalMode(RetrievalMode.Text);
             }
             setShowUserUpload(config.showUserUpload);
+<<<<<<< HEAD
+=======
+            setshowLanguagePicker(config.showLanguagePicker);
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
             setShowSpeechInput(config.showSpeechInput);
             setShowSpeechOutputBrowser(config.showSpeechOutputBrowser);
             setShowSpeechOutputAzure(config.showSpeechOutputAzure);
@@ -175,6 +214,10 @@ const Chat = () => {
                         vector_fields: vectorFieldList,
                         use_gpt4v: useGPT4V,
                         gpt4v_input: gpt4vInput,
+<<<<<<< HEAD
+=======
+                        language: i18n.language,
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                         ...(seed !== null ? { seed: seed } : {})
                     }
                 },
@@ -186,16 +229,31 @@ const Chat = () => {
             if (!response.body) {
                 throw Error("No response body");
             }
+<<<<<<< HEAD
+=======
+            if (response.status > 299 || !response.ok) {
+                throw Error(`Request failed with status ${response.status}`);
+            }
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
             if (shouldStream) {
                 const parsedResponse: ChatAppResponse = await handleAsyncRequest(question, answers, response.body);
                 setAnswers([...answers, [question, parsedResponse]]);
             } else {
                 const parsedResponse: ChatAppResponseOrError = await response.json();
+<<<<<<< HEAD
                 if (response.status > 299 || !response.ok) {
                     throw Error(parsedResponse.error || "Unknown error");
                 }
                 setAnswers([...answers, [question, parsedResponse as ChatAppResponse]]);
             }
+=======
+                if (parsedResponse.error) {
+                    throw Error(parsedResponse.error);
+                }
+                setAnswers([...answers, [question, parsedResponse as ChatAppResponse]]);
+            }
+            setSpeechUrls([...speechUrls, null]);
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
         } catch (e) {
             setError(e);
         } finally {
@@ -209,6 +267,10 @@ const Chat = () => {
         setActiveCitation(undefined);
         setActiveAnalysisPanelTab(undefined);
         setAnswers([]);
+<<<<<<< HEAD
+=======
+        setSpeechUrls([]);
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
         setStreamedAnswers([]);
         setIsLoading(false);
         setIsStreaming(false);
@@ -220,6 +282,7 @@ const Chat = () => {
         getConfig();
     }, []);
 
+<<<<<<< HEAD
     useEffect(() => {
         if (answers && showSpeechOutputAzure) {
             // For each answer that is missing a speech URL, fetch the speech URL
@@ -233,6 +296,8 @@ const Chat = () => {
         }
     }, [answers]);
 
+=======
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
     const onPromptTemplateChange = (_ev?: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => {
         setPromptTemplate(newValue || "");
     };
@@ -337,9 +402,20 @@ const Chat = () => {
     const useGroupsSecurityFilterFieldId = useId("useGroupsSecurityFilterField");
     const shouldStreamId = useId("shouldStream");
     const shouldStreamFieldId = useId("shouldStreamField");
+<<<<<<< HEAD
 
     return (
         <div className={styles.container}>
+=======
+    const { t, i18n } = useTranslation();
+
+    return (
+        <div className={styles.container}>
+            {/* Setting the page title using react-helmet-async */}
+            <Helmet>
+                <title>{t("pageTitle")}</title>
+            </Helmet>
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
             <div className={styles.commandsContainer}>
                 <ClearChatButton className={styles.commandButton} onClick={clearChat} disabled={!lastQuestionRef.current || isLoading} />
                 {showUserUpload && <UploadFile className={styles.commandButton} disabled={!loggedIn} />}
@@ -350,8 +426,15 @@ const Chat = () => {
                     {!lastQuestionRef.current ? (
                         <div className={styles.chatEmptyState}>
                             <SparkleFilled fontSize={"120px"} primaryFill={"rgba(115, 118, 225, 1)"} aria-hidden="true" aria-label="Chat logo" />
+<<<<<<< HEAD
                             <h1 className={styles.chatEmptyStateTitle}>Chat with your data</h1>
                             <h2 className={styles.chatEmptyStateSubtitle}>Ask anything or try an example</h2>
+=======
+                            <h1 className={styles.chatEmptyStateTitle}>{t("chatEmptyStateTitle")}</h1>
+                            <h2 className={styles.chatEmptyStateSubtitle}>{t("chatEmptyStateSubtitle")}</h2>
+                            {showLanguagePicker && <LanguagePicker onLanguageChange={newLang => i18n.changeLanguage(newLang)} />}
+
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                             <ExampleList onExampleClicked={onExampleClicked} useGPT4V={useGPT4V} />
                         </div>
                     ) : (
@@ -365,6 +448,11 @@ const Chat = () => {
                                                 isStreaming={true}
                                                 key={index}
                                                 answer={streamedAnswer[1]}
+<<<<<<< HEAD
+=======
+                                                index={index}
+                                                speechConfig={speechConfig}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                                                 isSelected={false}
                                                 onCitationClicked={c => onShowCitation(c, index)}
                                                 onThoughtProcessClicked={() => onToggleTab(AnalysisPanelTabs.ThoughtProcessTab, index)}
@@ -373,7 +461,10 @@ const Chat = () => {
                                                 showFollowupQuestions={useSuggestFollowupQuestions && answers.length - 1 === index}
                                                 showSpeechOutputAzure={showSpeechOutputAzure}
                                                 showSpeechOutputBrowser={showSpeechOutputBrowser}
+<<<<<<< HEAD
                                                 speechUrl={speechUrls[index]}
+=======
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                                             />
                                         </div>
                                     </div>
@@ -387,6 +478,11 @@ const Chat = () => {
                                                 isStreaming={false}
                                                 key={index}
                                                 answer={answer[1]}
+<<<<<<< HEAD
+=======
+                                                index={index}
+                                                speechConfig={speechConfig}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                                                 isSelected={selectedAnswer === index && activeAnalysisPanelTab !== undefined}
                                                 onCitationClicked={c => onShowCitation(c, index)}
                                                 onThoughtProcessClicked={() => onToggleTab(AnalysisPanelTabs.ThoughtProcessTab, index)}
@@ -395,7 +491,10 @@ const Chat = () => {
                                                 showFollowupQuestions={useSuggestFollowupQuestions && answers.length - 1 === index}
                                                 showSpeechOutputAzure={showSpeechOutputAzure}
                                                 showSpeechOutputBrowser={showSpeechOutputBrowser}
+<<<<<<< HEAD
                                                 speechUrl={speechUrls[index]}
+=======
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                                             />
                                         </div>
                                     </div>
@@ -423,7 +522,11 @@ const Chat = () => {
                     <div className={styles.chatInput}>
                         <QuestionInput
                             clearOnSend
+<<<<<<< HEAD
                             placeholder="Type a new question (e.g. does my plan cover annual eye exams?)"
+=======
+                            placeholder={t("defaultExamples.placeholder")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                             disabled={isLoading}
                             onSend={question => makeApiRequest(question)}
                             showSpeechInput={showSpeechInput}
@@ -443,19 +546,32 @@ const Chat = () => {
                 )}
 
                 <Panel
+<<<<<<< HEAD
                     headerText="Configure answer generation"
                     isOpen={isConfigPanelOpen}
                     isBlocking={false}
                     onDismiss={() => setIsConfigPanelOpen(false)}
                     closeButtonAriaLabel="Close"
                     onRenderFooterContent={() => <DefaultButton onClick={() => setIsConfigPanelOpen(false)}>Close</DefaultButton>}
+=======
+                    headerText={t("labels.headerText")}
+                    isOpen={isConfigPanelOpen}
+                    isBlocking={false}
+                    onDismiss={() => setIsConfigPanelOpen(false)}
+                    closeButtonAriaLabel={t("labels.closeButton")}
+                    onRenderFooterContent={() => <DefaultButton onClick={() => setIsConfigPanelOpen(false)}>{t("labels.closeButton")}</DefaultButton>}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                     isFooterAtBottom={true}
                 >
                     <TextField
                         id={promptTemplateFieldId}
                         className={styles.chatSettingsSeparator}
                         defaultValue={promptTemplate}
+<<<<<<< HEAD
                         label="Override prompt template"
+=======
+                        label={t("labels.promptTemplate")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                         multiline
                         autoAdjustHeight
                         onChange={onPromptTemplateChange}
@@ -464,7 +580,11 @@ const Chat = () => {
                             <HelpCallout
                                 labelId={promptTemplateId}
                                 fieldId={promptTemplateFieldId}
+<<<<<<< HEAD
                                 helpText={toolTipText.promptTemplate}
+=======
+                                helpText={t("helpTexts.promptTemplate")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                                 label={props?.label}
                             />
                         )}
@@ -473,7 +593,11 @@ const Chat = () => {
                     <TextField
                         id={temperatureFieldId}
                         className={styles.chatSettingsSeparator}
+<<<<<<< HEAD
                         label="Temperature"
+=======
+                        label={t("labels.temperature")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                         type="number"
                         min={0}
                         max={1}
@@ -482,27 +606,43 @@ const Chat = () => {
                         onChange={onTemperatureChange}
                         aria-labelledby={temperatureId}
                         onRenderLabel={(props: ITextFieldProps | undefined) => (
+<<<<<<< HEAD
                             <HelpCallout labelId={temperatureId} fieldId={temperatureFieldId} helpText={toolTipText.temperature} label={props?.label} />
+=======
+                            <HelpCallout labelId={temperatureId} fieldId={temperatureFieldId} helpText={t("helpTexts.temperature")} label={props?.label} />
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                         )}
                     />
 
                     <TextField
                         id={seedFieldId}
                         className={styles.chatSettingsSeparator}
+<<<<<<< HEAD
                         label="Seed"
+=======
+                        label={t("labels.seed")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                         type="text"
                         defaultValue={seed?.toString() || ""}
                         onChange={onSeedChange}
                         aria-labelledby={seedId}
                         onRenderLabel={(props: ITextFieldProps | undefined) => (
+<<<<<<< HEAD
                             <HelpCallout labelId={seedId} fieldId={seedFieldId} helpText={toolTipText.seed} label={props?.label} />
+=======
+                            <HelpCallout labelId={seedId} fieldId={seedFieldId} helpText={t("helpTexts.seed")} label={props?.label} />
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                         )}
                     />
 
                     <TextField
                         id={searchScoreFieldId}
                         className={styles.chatSettingsSeparator}
+<<<<<<< HEAD
                         label="Minimum search score"
+=======
+                        label={t("labels.minimumSearchScore")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                         type="number"
                         min={0}
                         step={0.01}
@@ -510,7 +650,11 @@ const Chat = () => {
                         onChange={onMinimumSearchScoreChange}
                         aria-labelledby={searchScoreId}
                         onRenderLabel={(props: ITextFieldProps | undefined) => (
+<<<<<<< HEAD
                             <HelpCallout labelId={searchScoreId} fieldId={searchScoreFieldId} helpText={toolTipText.searchScore} label={props?.label} />
+=======
+                            <HelpCallout labelId={searchScoreId} fieldId={searchScoreFieldId} helpText={t("helpTexts.searchScore")} label={props?.label} />
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                         )}
                     />
 
@@ -518,7 +662,11 @@ const Chat = () => {
                         <TextField
                             id={rerankerScoreFieldId}
                             className={styles.chatSettingsSeparator}
+<<<<<<< HEAD
                             label="Minimum reranker score"
+=======
+                            label={t("labels.minimumRerankerScore")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                             type="number"
                             min={1}
                             max={4}
@@ -530,7 +678,11 @@ const Chat = () => {
                                 <HelpCallout
                                     labelId={rerankerScoreId}
                                     fieldId={rerankerScoreFieldId}
+<<<<<<< HEAD
                                     helpText={toolTipText.rerankerScore}
+=======
+                                    helpText={t("helpTexts.rerankerScore")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                                     label={props?.label}
                                 />
                             )}
@@ -540,7 +692,11 @@ const Chat = () => {
                     <TextField
                         id={retrieveCountFieldId}
                         className={styles.chatSettingsSeparator}
+<<<<<<< HEAD
                         label="Retrieve this many search results:"
+=======
+                        label={t("labels.retrieveCount")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                         type="number"
                         min={1}
                         max={50}
@@ -548,14 +704,27 @@ const Chat = () => {
                         onChange={onRetrieveCountChange}
                         aria-labelledby={retrieveCountId}
                         onRenderLabel={(props: ITextFieldProps | undefined) => (
+<<<<<<< HEAD
                             <HelpCallout labelId={retrieveCountId} fieldId={retrieveCountFieldId} helpText={toolTipText.retrieveNumber} label={props?.label} />
+=======
+                            <HelpCallout
+                                labelId={retrieveCountId}
+                                fieldId={retrieveCountFieldId}
+                                helpText={t("helpTexts.retrieveNumber")}
+                                label={props?.label}
+                            />
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                         )}
                     />
 
                     <TextField
                         id={excludeCategoryFieldId}
                         className={styles.chatSettingsSeparator}
+<<<<<<< HEAD
                         label="Exclude category"
+=======
+                        label={t("labels.excludeCategory")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                         defaultValue={excludeCategory}
                         onChange={onExcludeCategoryChanged}
                         aria-labelledby={excludeCategoryId}
@@ -563,7 +732,11 @@ const Chat = () => {
                             <HelpCallout
                                 labelId={excludeCategoryId}
                                 fieldId={excludeCategoryFieldId}
+<<<<<<< HEAD
                                 helpText={toolTipText.excludeCategory}
+=======
+                                helpText={t("helpTexts.excludeCategory")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                                 label={props?.label}
                             />
                         )}
@@ -575,14 +748,22 @@ const Chat = () => {
                                 id={semanticRankerFieldId}
                                 className={styles.chatSettingsSeparator}
                                 checked={useSemanticRanker}
+<<<<<<< HEAD
                                 label="Use semantic ranker for retrieval"
+=======
+                                label={t("labels.useSemanticRanker")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                                 onChange={onUseSemanticRankerChange}
                                 aria-labelledby={semanticRankerId}
                                 onRenderLabel={(props: ICheckboxProps | undefined) => (
                                     <HelpCallout
                                         labelId={semanticRankerId}
                                         fieldId={semanticRankerFieldId}
+<<<<<<< HEAD
                                         helpText={toolTipText.useSemanticReranker}
+=======
+                                        helpText={t("helpTexts.useSemanticReranker")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                                         label={props?.label}
                                     />
                                 )}
@@ -592,7 +773,11 @@ const Chat = () => {
                                 id={semanticCaptionsFieldId}
                                 className={styles.chatSettingsSeparator}
                                 checked={useSemanticCaptions}
+<<<<<<< HEAD
                                 label="Use semantic captions"
+=======
+                                label={t("labels.useSemanticCaptions")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                                 onChange={onUseSemanticCaptionsChange}
                                 disabled={!useSemanticRanker}
                                 aria-labelledby={semanticCaptionsId}
@@ -600,7 +785,11 @@ const Chat = () => {
                                     <HelpCallout
                                         labelId={semanticCaptionsId}
                                         fieldId={semanticCaptionsFieldId}
+<<<<<<< HEAD
                                         helpText={toolTipText.useSemanticCaptions}
+=======
+                                        helpText={t("helpTexts.useSemanticCaptions")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                                         label={props?.label}
                                     />
                                 )}
@@ -612,14 +801,22 @@ const Chat = () => {
                         id={suggestFollowupQuestionsFieldId}
                         className={styles.chatSettingsSeparator}
                         checked={useSuggestFollowupQuestions}
+<<<<<<< HEAD
                         label="Suggest follow-up questions"
+=======
+                        label={t("labels.useSuggestFollowupQuestions")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                         onChange={onUseSuggestFollowupQuestionsChange}
                         aria-labelledby={suggestFollowupQuestionsId}
                         onRenderLabel={(props: ICheckboxProps | undefined) => (
                             <HelpCallout
                                 labelId={suggestFollowupQuestionsId}
                                 fieldId={suggestFollowupQuestionsFieldId}
+<<<<<<< HEAD
                                 helpText={toolTipText.suggestFollowupQuestions}
+=======
+                                helpText={t("helpTexts.suggestFollowupQuestions")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                                 label={props?.label}
                             />
                         )}
@@ -651,7 +848,11 @@ const Chat = () => {
                                 id={useOidSecurityFilterFieldId}
                                 className={styles.chatSettingsSeparator}
                                 checked={useOidSecurityFilter || requireAccessControl}
+<<<<<<< HEAD
                                 label="Use oid security filter"
+=======
+                                label={t("labels.useOidSecurityFilter")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                                 disabled={!loggedIn || requireAccessControl}
                                 onChange={onUseOidSecurityFilterChange}
                                 aria-labelledby={useOidSecurityFilterId}
@@ -659,7 +860,11 @@ const Chat = () => {
                                     <HelpCallout
                                         labelId={useOidSecurityFilterId}
                                         fieldId={useOidSecurityFilterFieldId}
+<<<<<<< HEAD
                                         helpText={toolTipText.useOidSecurityFilter}
+=======
+                                        helpText={t("helpTexts.useOidSecurityFilter")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                                         label={props?.label}
                                     />
                                 )}
@@ -668,7 +873,11 @@ const Chat = () => {
                                 id={useGroupsSecurityFilterFieldId}
                                 className={styles.chatSettingsSeparator}
                                 checked={useGroupsSecurityFilter || requireAccessControl}
+<<<<<<< HEAD
                                 label="Use groups security filter"
+=======
+                                label={t("labels.useGroupsSecurityFilter")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                                 disabled={!loggedIn || requireAccessControl}
                                 onChange={onUseGroupsSecurityFilterChange}
                                 aria-labelledby={useGroupsSecurityFilterId}
@@ -676,7 +885,11 @@ const Chat = () => {
                                     <HelpCallout
                                         labelId={useGroupsSecurityFilterId}
                                         fieldId={useGroupsSecurityFilterFieldId}
+<<<<<<< HEAD
                                         helpText={toolTipText.useGroupsSecurityFilter}
+=======
+                                        helpText={t("helpTexts.useGroupsSecurityFilter")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                                         label={props?.label}
                                     />
                                 )}
@@ -688,11 +901,19 @@ const Chat = () => {
                         id={shouldStreamFieldId}
                         className={styles.chatSettingsSeparator}
                         checked={shouldStream}
+<<<<<<< HEAD
                         label="Stream chat completion responses"
                         onChange={onShouldStreamChange}
                         aria-labelledby={shouldStreamId}
                         onRenderLabel={(props: ICheckboxProps | undefined) => (
                             <HelpCallout labelId={shouldStreamId} fieldId={shouldStreamFieldId} helpText={toolTipText.streamChat} label={props?.label} />
+=======
+                        label={t("labels.shouldStream")}
+                        onChange={onShouldStreamChange}
+                        aria-labelledby={shouldStreamId}
+                        onRenderLabel={(props: ICheckboxProps | undefined) => (
+                            <HelpCallout labelId={shouldStreamId} fieldId={shouldStreamFieldId} helpText={t("helpTexts.streamChat")} label={props?.label} />
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                         )}
                     />
 

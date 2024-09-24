@@ -23,6 +23,7 @@ class RetrieveThenReadVisionApproach(Approach):
     """
 
     system_chat_template_gpt4v = (
+<<<<<<< HEAD
      "You are a fun and jolly assistant helping gym members with their inquiries. The documents you access contain text, images, workout routines, nutritional information, and gym policies. "
         + "Each image source has the file name in the top left corner of the image with coordinates (10,10) pixels and is in the format SourceFileName:<file_name> "
         + "Each text source starts in a new line and has the file name followed by a colon and the actual information "
@@ -33,6 +34,16 @@ class RetrieveThenReadVisionApproach(Approach):
         + "If you cannot answer using the sources below, say you don't know. Return just the answer without any input texts. "
         + "Remember to keep your responses fun and jolly, using emojis and light-hearted language. Your responses should be 3 to 4 lines in a paragraph format."
      )
+=======
+        "You are an intelligent assistant helping analyze the Annual Financial Report of Contoso Ltd., The documents contain text, graphs, tables and images. "
+        + "Each image source has the file name in the top left corner of the image with coordinates (10,10) pixels and is in the format SourceFileName:<file_name> "
+        + "Each text source starts in a new line and has the file name followed by colon and the actual information "
+        + "Always include the source name from the image or text for each fact you use in the response in the format: [filename] "
+        + "Answer the following question using only the data provided in the sources below. "
+        + "The text and image source can be the same file name, don't use the image title when citing the image source, only use the file name as mentioned "
+        + "If you cannot answer using the sources below, say you don't know. Return just the answer without any input texts "
+    )
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 
     def __init__(
         self,
@@ -143,6 +154,7 @@ class RetrieveThenReadVisionApproach(Approach):
             new_user_content=user_content,
             max_tokens=self.gpt4v_token_limit - response_token_limit,
         )
+<<<<<<< HEAD
         chat_completion = (
             await self.openai_client.chat.completions.create(
                 model=self.gpt4v_deployment if self.gpt4v_deployment else self.gpt4v_model,
@@ -153,6 +165,16 @@ class RetrieveThenReadVisionApproach(Approach):
                 seed=seed,
             )
         ).model_dump()
+=======
+        chat_completion = await self.openai_client.chat.completions.create(
+            model=self.gpt4v_deployment if self.gpt4v_deployment else self.gpt4v_model,
+            messages=updated_messages,
+            temperature=overrides.get("temperature", 0.3),
+            max_tokens=response_token_limit,
+            n=1,
+            seed=seed,
+        )
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 
         data_points = {
             "text": sources_content,
@@ -181,7 +203,11 @@ class RetrieveThenReadVisionApproach(Approach):
                 ),
                 ThoughtStep(
                     "Prompt to generate answer",
+<<<<<<< HEAD
                     [str(message) for message in updated_messages],
+=======
+                    updated_messages,
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                     (
                         {"model": self.gpt4v_model, "deployment": self.gpt4v_deployment}
                         if self.gpt4v_deployment
@@ -191,8 +217,19 @@ class RetrieveThenReadVisionApproach(Approach):
             ],
         }
 
+<<<<<<< HEAD
         completion = {}
         completion["message"] = chat_completion["choices"][0]["message"]
         completion["context"] = extra_info
         completion["session_state"] = session_state
         return completion
+=======
+        return {
+            "message": {
+                "content": chat_completion.choices[0].message.content,
+                "role": chat_completion.choices[0].message.role,
+            },
+            "context": extra_info,
+            "session_state": session_state,
+        }
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0

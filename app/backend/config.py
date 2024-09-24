@@ -14,6 +14,10 @@ CONFIG_VECTOR_SEARCH_ENABLED = "vector_search_enabled"
 CONFIG_SEARCH_CLIENT = "search_client"
 CONFIG_OPENAI_CLIENT = "openai_client"
 CONFIG_INGESTER = "ingester"
+<<<<<<< HEAD
+=======
+CONFIG_LANGUAGE_PICKER_ENABLED = "language_picker_enabled"
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 CONFIG_SPEECH_INPUT_ENABLED = "speech_input_enabled"
 CONFIG_SPEECH_OUTPUT_BROWSER_ENABLED = "speech_output_browser_enabled"
 CONFIG_SPEECH_OUTPUT_AZURE_ENABLED = "speech_output_azure_enabled"

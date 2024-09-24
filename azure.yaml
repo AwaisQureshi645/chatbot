@@ -7,9 +7,17 @@ services:
   backend:
     project: ./app/backend
     language: py
+<<<<<<< HEAD
     host: appservice
     hooks:
       prepackage:
+=======
+    # Please check docs/azure_container_apps.md for more information on how to deploy to Azure Container Apps
+    # host: containerapp
+    host: appservice
+    hooks:
+      prebuild:
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
         windows:
           shell: pwsh
           run:  cd ../frontend;npm install;npm run build
@@ -67,6 +75,10 @@ pipeline:
       - AZURE_COMPUTER_VISION_RESOURCE_GROUP
       - AZURE_COMPUTER_VISION_LOCATION
       - AZURE_COMPUTER_VISION_SKU
+<<<<<<< HEAD
+=======
+      - ENABLE_LANGUAGE_PICKER
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
       - USE_SPEECH_INPUT_BROWSER
       - USE_SPEECH_OUTPUT_BROWSER
       - USE_SPEECH_OUTPUT_AZURE
@@ -85,6 +97,11 @@ pipeline:
       - AZURE_ADLS_GEN2_STORAGE_ACCOUNT
       - AZURE_ADLS_GEN2_FILESYSTEM_PATH
       - AZURE_ADLS_GEN2_FILESYSTEM
+<<<<<<< HEAD
+=======
+      - DEPLOYMENT_TARGET
+      - AZURE_CONTAINER_APPS_WORKLOAD_PROFILE
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
   secrets:
       - AZURE_SERVER_APP_SECRET
       - AZURE_CLIENT_APP_SECRET

@@ -2,7 +2,11 @@ import { useState, useEffect, useContext } from "react";
 import { Stack, TextField } from "@fluentui/react";
 import { Button, Tooltip } from "@fluentui/react-components";
 import { Send28Filled } from "@fluentui/react-icons";
+<<<<<<< HEAD
 import { useMsal } from "@azure/msal-react";
+=======
+import { useTranslation } from "react-i18next";
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 
 import styles from "./QuestionInput.module.css";
 import { SpeechInput } from "./SpeechInput";
@@ -21,6 +25,11 @@ interface Props {
 export const QuestionInput = ({ onSend, disabled, placeholder, clearOnSend, initQuestion, showSpeechInput }: Props) => {
     const [question, setQuestion] = useState<string>("");
     const { loggedIn } = useContext(LoginContext);
+<<<<<<< HEAD
+=======
+    const { t } = useTranslation();
+    const [isComposing, setIsComposing] = useState(false);
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 
     useEffect(() => {
         initQuestion && setQuestion(initQuestion);
@@ -39,12 +48,27 @@ export const QuestionInput = ({ onSend, disabled, placeholder, clearOnSend, init
     };
 
     const onEnterPress = (ev: React.KeyboardEvent<Element>) => {
+<<<<<<< HEAD
+=======
+        if (isComposing) return;
+
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
         if (ev.key === "Enter" && !ev.shiftKey) {
             ev.preventDefault();
             sendQuestion();
         }
     };
 
+<<<<<<< HEAD
+=======
+    const handleCompositionStart = () => {
+        setIsComposing(true);
+    };
+    const handleCompositionEnd = () => {
+        setIsComposing(false);
+    };
+
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
     const onQuestionChange = (_ev: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => {
         if (!newValue) {
             setQuestion("");
@@ -72,9 +96,17 @@ export const QuestionInput = ({ onSend, disabled, placeholder, clearOnSend, init
                 value={question}
                 onChange={onQuestionChange}
                 onKeyDown={onEnterPress}
+<<<<<<< HEAD
             />
             <div className={styles.questionInputButtonsContainer}>
                 <Tooltip content="Submit question" relationship="label">
+=======
+                onCompositionStart={handleCompositionStart}
+                onCompositionEnd={handleCompositionEnd}
+            />
+            <div className={styles.questionInputButtonsContainer}>
+                <Tooltip content={t("tooltips.submitQuestion")} relationship="label">
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                     <Button size="large" icon={<Send28Filled primaryFill="rgba(115, 118, 225, 1)" />} disabled={sendQuestionDisabled} onClick={sendQuestion} />
                 </Tooltip>
             </div>

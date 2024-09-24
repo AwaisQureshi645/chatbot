@@ -35,6 +35,10 @@ export type ChatAppRequestOverrides = {
     use_gpt4v?: boolean;
     gpt4v_input?: GPT4VInput;
     vector_fields: VectorFieldOptions[];
+<<<<<<< HEAD
+=======
+    language: string;
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 };
 
 export type ResponseMessage = {
@@ -84,6 +88,10 @@ export type Config = {
     showSemanticRankerOption: boolean;
     showVectorOption: boolean;
     showUserUpload: boolean;
+<<<<<<< HEAD
+=======
+    showLanguagePicker: boolean;
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
     showSpeechInput: boolean;
     showSpeechOutputBrowser: boolean;
     showSpeechOutputAzure: boolean;
@@ -92,3 +100,14 @@ export type Config = {
 export type SimpleAPIResponse = {
     message?: string;
 };
+<<<<<<< HEAD
+=======
+
+export interface SpeechConfig {
+    speechUrls: (string | null)[];
+    setSpeechUrls: (urls: (string | null)[]) => void;
+    audio: HTMLAudioElement;
+    isPlaying: boolean;
+    setIsPlaying: (isPlaying: boolean) => void;
+}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0

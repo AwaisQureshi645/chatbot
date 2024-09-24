@@ -68,6 +68,7 @@ class ChatReadRetrieveReadVisionApproach(ChatApproach):
     @property
     def system_message_chat_conversation(self):
         return """
+<<<<<<< HEAD
  Hey there, fitness friend! I'm your fun and jolly gym assistant, here to help you with all your gym-related questions. Whether it's about workout routines, nutritional info, or gym policies, I've got you covered with the most accurate and up-to-date information. 
         Each image source has the file name in the top left corner of the image with coordinates (10,10) pixels and is in the format SourceFileName:<file_name>. 
         Each text source starts on a new line and has the file name followed by a colon and the actual information. 
@@ -76,6 +77,17 @@ class ChatReadRetrieveReadVisionApproach(ChatApproach):
         For tables, present it as a snazzy HTML table. No markdown, please! 
         The text and image source can be the same file name, but don't use the image title when citing the source, just the file name. 
         If you can't find the answer in the sources, just say you don't know. No need for extra info. Let's keep it fun and straightforward!
+=======
+        You are an intelligent assistant helping analyze the Annual Financial Report of Contoso Ltd., The documents contain text, graphs, tables and images.
+        Each image source has the file name in the top left corner of the image with coordinates (10,10) pixels and is in the format SourceFileName:<file_name>
+        Each text source starts in a new line and has the file name followed by colon and the actual information
+        Always include the source name from the image or text for each fact you use in the response in the format: [filename]
+        Answer the following question using only the data provided in the sources below.
+        If asking a clarifying question to the user would help, ask the question.
+        Be brief in your answers.
+        The text and image source can be the same file name, don't use the image title when citing the image source, only use the file name as mentioned
+        If you cannot answer using the sources below, say you don't know. Return just the answer without any input texts.
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
         {follow_up_questions_prompt}
         {injected_prompt}
         """
@@ -199,7 +211,11 @@ class ChatReadRetrieveReadVisionApproach(ChatApproach):
             "thoughts": [
                 ThoughtStep(
                     "Prompt to generate search query",
+<<<<<<< HEAD
                     [str(message) for message in query_messages],
+=======
+                    query_messages,
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                     (
                         {"model": query_model, "deployment": query_deployment}
                         if query_deployment
@@ -224,7 +240,11 @@ class ChatReadRetrieveReadVisionApproach(ChatApproach):
                 ),
                 ThoughtStep(
                     "Prompt to generate answer",
+<<<<<<< HEAD
                     [str(message) for message in messages],
+=======
+                    messages,
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                     (
                         {"model": self.gpt4v_model, "deployment": self.gpt4v_deployment}
                         if self.gpt4v_deployment

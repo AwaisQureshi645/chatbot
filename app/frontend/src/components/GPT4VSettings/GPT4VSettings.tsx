@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react";
 import { Stack, Checkbox, ICheckboxProps, IDropdownOption, IDropdownProps, Dropdown } from "@fluentui/react";
 import { useId } from "@fluentui/react-hooks";
+<<<<<<< HEAD
+=======
+import { useTranslation } from "react-i18next";
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 
 import styles from "./GPT4VSettings.module.css";
 import { GPT4VInput } from "../../api";
 import { HelpCallout } from "../../components/HelpCallout";
+<<<<<<< HEAD
 import { toolTipText } from "../../i18n/tooltips.js";
+=======
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 
 interface Props {
     gpt4vInputs: GPT4VInput;
@@ -39,23 +46,36 @@ export const GPT4VSettings = ({ updateGPT4VInputs, updateUseGPT4V, isUseGPT4V, g
     const useGPT4VFieldId = useId("useGPT4VField");
     const gpt4VInputId = useId("gpt4VInput");
     const gpt4VInputFieldId = useId("gpt4VInputField");
+<<<<<<< HEAD
+=======
+    const { t } = useTranslation();
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 
     return (
         <Stack className={styles.container} tokens={{ childrenGap: 10 }}>
             <Checkbox
                 id={useGPT4VFieldId}
                 checked={useGPT4V}
+<<<<<<< HEAD
                 label="Use GPT vision model"
                 onChange={onuseGPT4V}
                 aria-labelledby={useGPT4VId}
                 onRenderLabel={(props: ICheckboxProps | undefined) => (
                     <HelpCallout labelId={useGPT4VId} fieldId={useGPT4VFieldId} helpText={toolTipText.useGPT4Vision} label={props?.label} />
+=======
+                label={t("labels.useGPT4V")}
+                onChange={onuseGPT4V}
+                aria-labelledby={useGPT4VId}
+                onRenderLabel={(props: ICheckboxProps | undefined) => (
+                    <HelpCallout labelId={useGPT4VId} fieldId={useGPT4VFieldId} helpText={t("helpTexts.useGPT4Vision")} label={props?.label} />
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                 )}
             />
             {useGPT4V && (
                 <Dropdown
                     id={gpt4VInputFieldId}
                     selectedKey={vectorFieldOption}
+<<<<<<< HEAD
                     label="GPT vision model inputs"
                     options={[
                         {
@@ -64,12 +84,26 @@ export const GPT4VSettings = ({ updateGPT4VInputs, updateUseGPT4V, isUseGPT4V, g
                         },
                         { text: "Images", key: GPT4VInput.Images },
                         { text: "Text", key: GPT4VInput.Texts }
+=======
+                    label={t("labels.gpt4VInput.label")}
+                    options={[
+                        {
+                            key: GPT4VInput.TextAndImages,
+                            text: t("labels.gpt4VInput.options.textAndImages")
+                        },
+                        { text: t("labels.gpt4VInput.options.images"), key: GPT4VInput.Images },
+                        { text: t("labels.gpt4VInput.options.texts"), key: GPT4VInput.Texts }
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                     ]}
                     required
                     onChange={onSetGPT4VInput}
                     aria-labelledby={gpt4VInputId}
                     onRenderLabel={(props: IDropdownProps | undefined) => (
+<<<<<<< HEAD
                         <HelpCallout labelId={gpt4VInputId} fieldId={gpt4VInputFieldId} helpText={toolTipText.gpt4VisionInputs} label={props?.label} />
+=======
+                        <HelpCallout labelId={gpt4VInputId} fieldId={gpt4VInputFieldId} helpText={t("helpTexts.gpt4VisionInputs")} label={props?.label} />
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                     )}
                 />
             )}

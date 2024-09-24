@@ -1,3 +1,9 @@
 # YAML: Set the AZURE_BICEP_FILE_EXPANSION configuration option to enable expansion
 configuration:
   AZURE_BICEP_FILE_EXPANSION: true
+<<<<<<< HEAD
+=======
+  AZURE_DEPLOYMENT_NONSENSITIVE_PARAMETER_NAMES:
+    - resourceToken
+    - migrationToken
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0

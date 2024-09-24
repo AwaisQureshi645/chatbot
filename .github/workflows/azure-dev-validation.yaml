@@ -22,7 +22,13 @@ jobs:
       - name: Build Bicep for linting
         uses: azure/CLI@v2
         with:
+<<<<<<< HEAD
           inlineScript: az config set bicep.use_binary_from_path=false && az bicep build -f infra/main.bicep --stdout
+=======
+          inlineScript: |
+            export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+            az config set bicep.use_binary_from_path=false && az bicep build -f infra/main.bicep --stdout
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 
   psrule:
     runs-on: ubuntu-latest
@@ -42,7 +48,11 @@ jobs:
           outputPath: reports/ps-rule-results.sarif
           summary: true
         continue-on-error: true
+<<<<<<< HEAD
           
+=======
+
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
         env:
           PSRULE_CONFIGURATION_AZURE_BICEP_FILE_EXPANSION: 'true'
           PSRULE_CONFIGURATION_AZURE_BICEP_FILE_EXPANSION_TIMEOUT: '30'

@@ -18,7 +18,17 @@
     line-height: 1.375em;
     padding-top: 1em;
     padding-bottom: 1em;
+<<<<<<< HEAD
     white-space: pre-line;
+=======
+}
+
+.answerText h1,
+h2,
+h2 {
+    font-size: 1rem;
+    font-weight: bold;
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 }
 
 .answerText table {

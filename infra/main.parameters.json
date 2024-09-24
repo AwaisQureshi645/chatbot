@@ -60,7 +60,11 @@
       "value": "${AZURE_SEARCH_SERVICE_LOCATION}"
     },
     "searchServiceSkuName": {
+<<<<<<< HEAD
       "value": "${AZURE_SEARCH_SERVICE_SKU=standard}"
+=======
+      "value": "${AZURE_SEARCH_SERVICE_SKU=basic}"
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
     },
     "searchQueryLanguage": {
       "value": "${AZURE_SEARCH_QUERY_LANGUAGE=en-us}"
@@ -126,7 +130,11 @@
       "value": "${AZURE_OPENAI_API_VERSION}"
     },
     "azureOpenAiApiKey":{
+<<<<<<< HEAD
       "value": "${AZURE_OPENAI_API_KEY}"
+=======
+      "value": "${AZURE_OPENAI_API_KEY_OVERRIDE}"
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
     },
     "openAiApiKey": {
       "value": "${OPENAI_API_KEY}"
@@ -152,6 +160,12 @@
     "useGPT4V": {
       "value": "${USE_GPT4V=false}"
     },
+<<<<<<< HEAD
+=======
+    "enableLanguagePicker": {
+      "value": "${ENABLE_LANGUAGE_PICKER=false}"
+    },
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
     "useSpeechInputBrowser": {
       "value": "${USE_SPEECH_INPUT_BROWSER=false}"
     },
@@ -179,15 +193,24 @@
     "enforceAccessControl": {
       "value": "${AZURE_ENFORCE_ACCESS_CONTROL=false}"
     },
+<<<<<<< HEAD
+=======
+    "disableAppServicesAuthentication": {
+      "value": "${AZURE_DISABLE_APP_SERVICES_AUTHENTICATION=false}"
+    },
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
     "enableGlobalDocuments": {
       "value": "${AZURE_ENABLE_GLOBAL_DOCUMENT_ACCESS=false}"
     },
     "enableUnauthenticatedAccess": {
       "value": "${AZURE_ENABLE_UNAUTHENTICATED_ACCESS=false}"
     },
+<<<<<<< HEAD
     "tenantId": {
       "value": "${AZURE_TENANT_ID}"
     },
+=======
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
     "authTenantId": {
       "value": "${AZURE_AUTH_TENANT_ID}"
     },
@@ -232,6 +255,18 @@
     },
     "runningOnAdo": {
       "value": "${TF_BUILD}"
+<<<<<<< HEAD
+=======
+    },
+    "deploymentTarget": {
+      "value": "${DEPLOYMENT_TARGET=appservice}"
+    },
+    "webAppExists": {
+        "value": "${SERVICE_WEB_RESOURCE_EXISTS=false}"
+    },
+    "azureContainerAppsWorkloadProfile": {
+      "value": "${AZURE_CONTAINER_APPS_WORKLOAD_PROFILE=Consumption}"
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
     }
   }
 }

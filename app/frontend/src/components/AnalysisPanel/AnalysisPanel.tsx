@@ -1,5 +1,9 @@
 import { Stack, Pivot, PivotItem } from "@fluentui/react";
+<<<<<<< HEAD
 
+=======
+import { useTranslation } from "react-i18next";
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 import styles from "./AnalysisPanel.module.css";
 
 import { SupportingContent } from "../SupportingContent";
@@ -30,6 +34,10 @@ export const AnalysisPanel = ({ answer, activeTab, activeCitation, citationHeigh
     const [citation, setCitation] = useState("");
 
     const client = useLogin ? useMsal().instance : undefined;
+<<<<<<< HEAD
+=======
+    const { t } = useTranslation();
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 
     const fetchCitation = async () => {
         const token = client ? await getToken(client) : undefined;
@@ -78,21 +86,33 @@ export const AnalysisPanel = ({ answer, activeTab, activeCitation, citationHeigh
         >
             <PivotItem
                 itemKey={AnalysisPanelTabs.ThoughtProcessTab}
+<<<<<<< HEAD
                 headerText="Thought process"
+=======
+                headerText={t("headerTexts.thoughtProcess")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                 headerButtonProps={isDisabledThoughtProcessTab ? pivotItemDisabledStyle : undefined}
             >
                 <ThoughtProcess thoughts={answer.context.thoughts || []} />
             </PivotItem>
             <PivotItem
                 itemKey={AnalysisPanelTabs.SupportingContentTab}
+<<<<<<< HEAD
                 headerText="Supporting content"
+=======
+                headerText={t("headerTexts.supportingContent")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                 headerButtonProps={isDisabledSupportingContentTab ? pivotItemDisabledStyle : undefined}
             >
                 <SupportingContent supportingContent={answer.context.data_points} />
             </PivotItem>
             <PivotItem
                 itemKey={AnalysisPanelTabs.CitationTab}
+<<<<<<< HEAD
                 headerText="Citation"
+=======
+                headerText={t("headerTexts.citation")}
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                 headerButtonProps={isDisabledCitationTab ? pivotItemDisabledStyle : undefined}
             >
                 {renderFileViewer()}

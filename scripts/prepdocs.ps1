@@ -65,8 +65,13 @@ if ($env:USE_FEATURE_INT_VECTORIZATION) {
   $integratedVectorizationArg = "--useintvectorization $env:USE_FEATURE_INT_VECTORIZATION"
 }
 
+<<<<<<< HEAD
 if ($env:AZURE_OPENAI_API_KEY) {
   $openaiApiKeyArg = "--openaikey $env:AZURE_OPENAI_API_KEY"
+=======
+if ($env:AZURE_OPENAI_API_KEY_OVERRIDE) {
+  $openaiApiKeyArg = "--openaikey $env:AZURE_OPENAI_API_KEY_OVERRIDE"
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 } elseif ($env:OPENAI_API_KEY) {
   $openaiApiKeyArg = "--openaikey $env:OPENAI_API_KEY"
 }

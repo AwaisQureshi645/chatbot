@@ -135,8 +135,16 @@ class AdlsGen2Setup:
                 logging.info(f"Could not find group {group_name}, creating...")
                 group = {
                     "displayName": group_name,
+<<<<<<< HEAD
                     "groupTypes": ["Unified"],
                     "securityEnabled": self.security_enabled_groups,
+=======
+                    "securityEnabled": self.security_enabled_groups,
+                    "groupTypes": ["Unified"],
+                    # If Unified does not work for you, then you may need the following settings instead:
+                    # "mailEnabled": False,
+                    # "mailNickname": group_name,
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
                 }
                 async with session.post("https://graph.microsoft.com/v1.0/groups", json=group) as response:
                     content = await response.json()

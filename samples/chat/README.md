@@ -57,7 +57,11 @@ The repo includes sample data so it's ready to try end to end. In this sample ap
 - Renders citations and thought process for each answer
 - Includes settings directly in the UI to tweak the behavior and experiment with options
 - Integrates Azure AI Search for indexing and retrieval of documents, with support for [many document formats](/docs/data_ingestion.md#supported-document-formats) as well as [integrated vectorization](/docs/data_ingestion.md#overview-of-integrated-vectorization)
+<<<<<<< HEAD
 - Optional usage of [GPT-4 with vision](/docs/gpt4vision.md) to reason over image-heavy documents
+=======
+- Optional usage of [GPT-4 with vision](/docs/gpt4v.md) to reason over image-heavy documents
+>>>>>>> 0225f751f75c4d7149b35f1d88a17cab5a041ab0
 - Optional addition of [speech input/output](/docs/deploy_features.md#enabling-speech-inputoutput) for accessibility
 - Optional automation of [user login and data access](/docs/login_and_acl.md) via Microsoft Entra
 - Performance tracing and monitoring with Application Insights
